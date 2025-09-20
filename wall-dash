@@ -2716,30 +2716,34 @@ views:
               action: perform-action
               perform_action: scene.turn_on
               target:
-                entity_id: scene.new_scene_2
-            entity: light.my_room
+                entity_id: scene.normal
+              data: {}
+            entity: scene.normal
             badge_icon: ''
             primary: Normal
-            icon_color: yellow
             secondary: ''
+            color: yellow
+            features_position: bottom
           - type: custom:mushroom-template-card
-            entity: scene.new_scene
+            entity: scene.reading_lights
             icon: mdi:book
-            icon_color: yellow
             tap_action:
               action: toggle
             primary: Book Light
             secondary: ''
+            color: yellow
+            features_position: bottom
           - type: custom:mushroom-template-card
             icon: mdi:invert-colors
             tap_action:
               action: toggle
             badge_icon: ''
             badge_color: ''
-            entity: scene.new_scene_3
+            entity: scene.new_scene_2
             primary: Dance Party
             secondary: ''
-            icon_color: blue
+            color: blue
+            features_position: bottom
           - type: custom:button-card
             name: Quick Actions
             styles:
@@ -2799,11 +2803,6 @@ views:
           - type: heading
             icon: ''
             heading_style: title
-        card_mod:
-          style: |
-            ha-card {
-              border-radius: 0pt
-            }
         view_layout:
           grid-area: sidebar
       - square: true
@@ -2813,7 +2812,7 @@ views:
             template:
               - circle
               - light
-            entity: light.my_room_lights
+            entity: light.my_room
             name: My room
             icon: mdi:bed
             size: 50%
@@ -2825,7 +2824,7 @@ views:
             template:
               - circle
               - light
-            entity: light.ikea_of_sweden_tradfri_bulb_e27_ws_opal_1000lm_light_3
+            entity: light.ikea_of_sweden_tradfri_bulb_e27_ws_opal_1000lm
             name: Bedside Lamp
             icon: mdi:desk-lamp-on
             size: 50%
@@ -2837,7 +2836,7 @@ views:
             template:
               - circle
               - light
-            entity: light.smart_curtain_lights
+            entity: light.h70b1
             name: Smart curtain light
             icon: mdi:vanity-light
             size: 50%
@@ -2849,7 +2848,7 @@ views:
             template:
               - circle
               - light
-            entity: light.ikea_of_sweden_tradfri_bulb_e27_cws_opal_600lm_light
+            entity: light.ikea_of_sweden_tradfri_bulb_e27_cws_opal_600lm
             name: Pictue light
             icon: null
             size: 50%
@@ -2873,9 +2872,9 @@ views:
             template:
               - circle
               - light
-            entity: light.
-            name: cupboard light
-            icon: phu:light-strip
+            entity: light.downlights
+            name: Downlights
+            icon: mdi:light-recessed
             size: 80%
             show_state: true
             aspect_ratio: 1/1
@@ -2885,19 +2884,22 @@ views:
             template:
               - circle
               - light
-            entity: null
-            name: Filament Bulb
-            size: 80%
+            entity: light.clock
+            name: Clock
+            size: 50%
+            icon: mdi:clock
             show_state: true
             aspect_ratio: 1/1
             double_tap_action:
               action: more-info
           - type: custom:button-card
-            template: base
-            entity: light.genio_rgb_fairy_light
-            name: String Lights
-            icon: mdi:string-lights
-            size: 80%
+            template:
+              - circle
+              - light
+            entity: light.reading_lights
+            name: Reading lights
+            icon: mdi:bed-double
+            size: 50%
             show_state: true
             aspect_ratio: 1/1
             double_tap_action:
@@ -2913,7 +2915,7 @@ views:
         cards:
           - type: custom:mini-media-player
             entity: media_player.joshuas_homepod
-            artwork: full-cover
+            artwork: material
             max_volume: '100'
             info: scroll
             volume_stateless: false
@@ -2932,7 +2934,7 @@ views:
                 - border-radius: 10px
               name:
                 - margin-left: '-26%'
-            tap_action: scene.new_scene_2
+            tap_action: scene.normal
           - type: custom:button-card
             entity: media_player.joshuas_homepod
             layout: icon_name
@@ -2962,15 +2964,16 @@ views:
           - type: custom:button-card
             entity: null
             layout: icon_name
-            icon: mdi:cog-outline
+            icon: mdi:restart
             size: 20pt
-            name: Options
+            name: Restart
             styles:
               card:
                 - border-radius: 10px
               name:
                 - margin-left: '-26%'
-            tap_action: settings
+            tap_action:
+              action: homeassistant.restart
           - type: custom:button-card
             layout: icon_name
             icon: mdi:power
@@ -2981,7 +2984,8 @@ views:
                 - border-radius: 10px
               name:
                 - margin-left: '-26%'
-            tap_action: shut down
+            tap_action:
+              action: hassio.host_shutdown
         view_layout:
           grid-area: footer
       - square: true
@@ -3461,7 +3465,7 @@ views:
     icon: mdi:ceiling-light
     cards:
       - type: custom:mushroom-light-card
-        entity: light.my_room_lights
+        entity: light.my_room
         use_light_color: true
         show_color_temp_control: true
         collapsible_controls: false
@@ -3482,27 +3486,27 @@ views:
         hold_action:
           action: more-info
       - type: custom:mushroom-light-card
-        entity: light.smart_curtain_lights
+        entity: light.h70b1
         icon: mdi:vanity-light
         use_light_color: true
         show_color_temp_control: true
         show_brightness_control: true
         show_color_control: true
       - type: custom:mushroom-light-card
-        entity: light.ikea_of_sweden_tradfri_bulb_e27_ws_opal_1000lm_light_3
+        entity: light.ikea_of_sweden_tradfri_bulb_e27_ws_opal_1000lm
         name: Bedside light
         use_light_color: true
         show_color_temp_control: true
         show_brightness_control: true
         show_color_control: true
       - type: custom:mushroom-light-card
-        entity: light.ikea_of_sweden_tradfri_bulb_e27_cws_opal_600lm_light
+        entity: light.ikea_of_sweden_tradfri_bulb_e27_cws_opal_600lm
         use_light_color: true
         show_color_temp_control: true
         show_brightness_control: true
         show_color_control: true
       - type: custom:mushroom-light-card
-        entity: light.shelf
+        entity: light.shelf_light
         use_light_color: true
         show_color_temp_control: false
         show_brightness_control: false
@@ -3525,7 +3529,7 @@ views:
           initialSlide: 0
         cards:
           - type: sensor
-            entity: sensor.my_room_power_current_consumption
+            entity: sensor.my_room_power_w
             hours_to_show: 40
             detail: 1
             graph: line
@@ -3554,7 +3558,7 @@ views:
               class: graph
               background: var(--blue-tint)
           - type: sensor
-            entity: sensor.appdaemon_cpu_percent
+            entity: sensor.home_assistant_supervisor_cpu_percent
             hours_to_show: 24
             detail: 1
             graph: line
@@ -3564,7 +3568,7 @@ views:
               class: graph
               background: var(--blue-tint)
           - type: sensor
-            entity: sensor.appdaemon_memory_percent
+            entity: sensor.home_assistant_core_memory_percent
             hours_to_show: 24
             detail: 1
             graph: line
@@ -3575,7 +3579,7 @@ views:
               background: var(--blue-tint)
           - type: sensor
             entity: sensor.home_assistant_host_disk_used
-            hours_to_show: 24
+            hours_to_show: 168
             detail: 1
             graph: line
             name: null
@@ -3650,3 +3654,10 @@ views:
              box-shadow: none
           }
     layout: {}
+    theme: Frosted Glass
+    background:
+      opacity: 0
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: scroll
